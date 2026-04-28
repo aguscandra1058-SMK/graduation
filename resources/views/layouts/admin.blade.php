@@ -92,6 +92,31 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ url('classrooms') }}" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Kelas
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('classes') }}" class="nav-link">
+              <i class="nav-icon fas fa-columns"></i>
+              <p>
+                Jurusan
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('classes') }}" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Peserta Didik
+              </p>
+            </a>
+          </li>
+          
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
