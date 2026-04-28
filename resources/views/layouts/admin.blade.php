@@ -101,7 +101,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ url('classes') }}" class="nav-link">
+            <a href="{{ url('majors') }}" class="nav-link">
               <i class="nav-icon fas fa-columns"></i>
               <p>
                 Jurusan
@@ -109,7 +109,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ url('classes') }}" class="nav-link">
+            <a href="{{ url('students') }}" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 Peserta Didik
