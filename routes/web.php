@@ -12,3 +12,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::resource('/classrooms', App\Http\Controllers\ClassroomController::class);
 Route::resource('/majors', App\Http\Controllers\MajorController::class);
+Route::resource('/students', App\Http\Controllers\StudentController::class);
