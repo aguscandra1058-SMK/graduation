@@ -8,8 +8,8 @@
             <a href="{{ url('classrooms/create') }}" class="btn btn-primary">Tambah Kelas</a>
         </div>
         <div class="card-body">
-            <table class="table">
-                <tr>
+            <table class="table table-bordered table-striped">
+                <tr class="text-center">
                     <th width="5%">No.</th>
                     <th width="85%">Kelas</th>
                     <th width="10%">Aksi</th>

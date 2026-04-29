@@ -19,7 +19,7 @@
                 <table id="datatable" class="table table-bordered table-striped">
                   <thead class="text-center">
                   <tr>
-                    <th>No.</th>
+                    <th width="4%">No.</th>
                     <th>NIS</th>
                     <th>NISN</th>
                     <th>Nama Siswa</th>

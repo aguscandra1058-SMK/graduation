@@ -8,8 +8,8 @@
             <a href="{{ url('majors/create') }}" class="btn btn-primary">Tambah Jurusan</a>
         </div>
         <div class="card-body">
-            <table class="table">
-                <tr>
+            <table class="table table-bordered table-striped">
+                <tr class="text-center">
                     <th width="5%">No.</th>
                     <th width="85%">Jurusan</th>
                     <th width="10%">Aksi</th>

@@ -32,7 +32,7 @@ class HomeController extends Controller
     {
         $totalclassrooms = Classroom::count();
         $totalmajors = Major::count();
-        $totalusers = User::count();
+        $totalusers = User::role('guru')->count();
         $totalstudents = Student::count();
         return view('home', compact('totalclassrooms', 'totalmajors', 'totalusers', 'totalstudents'));
     }
