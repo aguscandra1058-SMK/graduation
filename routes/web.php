@@ -1,10 +1,18 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\CekKelulusanController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [CekKelulusanController::class, 'index']);
+Route::get('/hasil', [CekKelulusanController::class, 'hasil']);
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/', [CekKelulusanController::class, 'index']);
+Route::get('/hasil', [CekKelulusanController::class, 'hasil']);
 
 Auth::routes(['register' => false]);
 

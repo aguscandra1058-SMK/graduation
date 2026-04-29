@@ -10,11 +10,11 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label>NIS</label>
-                        <input type="text" class="form-control" name="nis" value="{{ $student->nis }}">
+                        <input type="text" class="form-control" name="nis" value="{{ $student->nis }}" maxlength="4" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required>
                     </div>
                     <div class="form-group">
                         <label>NISN</label>
-                        <input type="text" class="form-control" name="nisn" value="{{ $student->nisn }}">
+                        <input type="text" class="form-control" name="nisn" value="{{ $student->nisn }}" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required>
                     </div>
                     <div class="form-group">
                         <label>Nama Siswa</label>

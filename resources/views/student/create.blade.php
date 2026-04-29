@@ -9,15 +9,15 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label>NIS</label>
-                        <input type="text" class="form-control" name="nis" placeholder="Masukkan NIS">
-                    </div>
+                        <input type="text" class="form-control" name="nis" maxlength="4" placeholder="Nomor Induk Siswa" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required>
+                    </div> 
                     <div class="form-group">
                         <label>NISN</label>
-                        <input type="text" class="form-control" name="nisn" placeholder="Masukkan NISN">
+                        <input type="text" class="form-control" name="nisn" maxlength="10" placeholder="Nomor Induk Siswa Nasional" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required>
                     </div>
                     <div class="form-group">
                         <label>Nama Siswa</label>
-                        <input type="text" class="form-control" name="name" placeholder="Masukkan nama siswa">
+                        <input type="text" class="form-control" name="name" placeholder="Masukkan nama siswa" required>
                     </div>
                     <div class="form-group">
                         <label>Gender</label>
