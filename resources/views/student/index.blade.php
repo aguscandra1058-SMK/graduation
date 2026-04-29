@@ -46,14 +46,14 @@
                         </td>
                         <td>{{ $student->classroom->name }}</td>
                         <td>{{ $student->major->name }}</td>
-                        <td>
+                        <td class="text-center">
                             @if ($student->status == 1)
                                 <span class="badge badge-success">Lulus</span>
                             @else
                                 <span class="badge badge-danger">Tidak Lulus</span>
                             @endif
                         </td>
-                        <td>
+                        <td class="text-center">
                             <a href="{{ url('students/'.$student->id.'/edit') }}" class="btn btn-sm btn-warning">Edit</a>
                             <form action="{{ url('students/' . $student->id) }}" method="POST" style="display: inline;">
                                 @csrf

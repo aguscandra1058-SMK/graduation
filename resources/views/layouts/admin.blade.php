@@ -94,6 +94,7 @@
               </p>
             </a>
           </li>
+          @role('admin')
           <li class="nav-item">
             <a href="{{ url('classrooms') }}" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
@@ -110,6 +111,8 @@
               </p>
             </a>
           </li>
+          @endrole
+          
           <li class="nav-item">
             <a href="{{ url('students') }}" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
@@ -119,6 +122,16 @@
             </a>
           </li>
           
+          @role('admin')
+          <li class="nav-item">
+            <a href="{{ url('users') }}" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Kelola Guru
+              </p>
+            </a>
+          </li>
+          @endrole
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

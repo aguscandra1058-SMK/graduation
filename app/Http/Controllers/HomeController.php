@@ -5,6 +5,9 @@ use App\Models\Classroom;
 use App\Models\Major;
 use App\Models\User;
 use App\Models\Student;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 
@@ -32,5 +35,21 @@ class HomeController extends Controller
         $totalusers = User::count();
         $totalstudents = Student::count();
         return view('home', compact('totalclassrooms', 'totalmajors', 'totalusers', 'totalstudents'));
+    }
+
+    public function test()
+    {
+        // $role = Role::create(['name' => 'guru']);
+        // $permission = Permission::create(['name' => 'edit students']);
+
+        // $role->givePermissionTo($permission);
+        // $permission->assignRole($role);
+        
+        // $user = auth()->user();
+        // $user->assignRole('admin');
+
+        $user = User::with('roles')->get();
+
+        return $user;
     }
 }
