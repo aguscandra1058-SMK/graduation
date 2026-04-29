@@ -10,9 +10,9 @@
         <div class="card-body">
             <table class="table">
                 <tr>
-                    <th width="100px">No.</th>
-                    <th>Jurusan</th>
-                    <th>Aksi</th>
+                    <th width="5%">No.</th>
+                    <th width="85%">Jurusan</th>
+                    <th width="10%">Aksi</th>
                 </tr>
                 @foreach ($majors as $key => $major)
                 <tr>

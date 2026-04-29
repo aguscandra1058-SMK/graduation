@@ -10,9 +10,9 @@
         <div class="card-body">
             <table class="table">
                 <tr>
-                    <th width="100px">No.</th>
-                    <th>Kelas</th>
-                    <th>Aksi</th>
+                    <th width="5%">No.</th>
+                    <th width="85%">Kelas</th>
+                    <th width="10%">Aksi</th>
                 </tr>
                 @foreach ($classrooms as $key => $classroom)
                 <tr>
