@@ -55,11 +55,13 @@
                         </td>
                         <td class="text-center">
                             <a href="{{ url('students/'.$student->id.'/edit') }}" class="btn btn-sm btn-warning">Edit</a>
+                            @role('admin')
                             <form action="{{ url('students/' . $student->id) }}" method="POST" style="display: inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus siswa ini?')">Hapus</button>
                             </form>
+                            @endrole
                         </td>
                     </tr>
                     @endforeach

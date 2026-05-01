@@ -3,13 +3,17 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CekKelulusanController;
+use Illuminate\Http\Request;
+use App\Models\Student;
 
 Route::get('/', [CekKelulusanController::class, 'index']);
 Route::get('/hasil', [CekKelulusanController::class, 'hasil']);
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/cek-nisn', function (Request $request) {
+    return response()->json([
+        'found' => Student::where('nisn', $request->nisn)->exists()
+    ]);
+});
 
 Route::get('/', [CekKelulusanController::class, 'index']);
 Route::get('/hasil', [CekKelulusanController::class, 'hasil']);

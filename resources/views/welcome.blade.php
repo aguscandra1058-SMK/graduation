@@ -22,6 +22,21 @@
             background: linear-gradient(135deg, #0d6efd, #0a58ca);
             color: white;
         }
+        #countdownAnim {
+            font-size: 60px;
+            animation: zoom 1s ease-in-out infinite;
+        }
+        button:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        
+
+        @keyframes zoom {
+            0% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.3); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.7; }
+        }
     </style>
 </head>
 <body>
@@ -38,9 +53,8 @@
                     <img src="{{ asset('assets/dist/img/logo.png') }}" alt="Logo SMK Bina Cipta" class="mb-4" style="width: 120px;">
                 </div>
 
-                <h1 class="fw-bold">PENGUMUMAN</h1>
-                <h1 class="fw-bold">KELULUSAN</h1>
-                <p>SMK Bina Cipta Palembang</p>
+                <h2 class="fw-bold">PENGUMUMAN KELULUSAN</h2>
+                <h5>SMK Bina Cipta Palembang</h5>
                 <p>Tahun Ajaran 2025/2026</p>
 
                 <h4 id="statusText" class="border p-3 mt-4 bg-primary text-white"></h4>
@@ -59,7 +73,12 @@
                     </div>
                 @endif
 
-                <form action="{{ url('hasil') }}" method="GET">
+                <form id="formCek" action="{{ url('hasil') }}" method="GET">
+                    <div id="loadingBox" class="text-center mt-4" style="display:none;">
+                        <h5 class="mb-3">Sedang memproses...</h5>
+                        <h1 id="countdownAnim" class="fw-bold text-primary">5</h1>
+                    </div>
+
                     <div class="mb-3">
                         <input type="text" 
                                name="nisn"
@@ -84,11 +103,9 @@
                 </p>
 
                 {{-- DATA TIDAK DITEMUKAN --}}
-                @if(request('nisn') && !isset($students))
-                    <div class="alert alert-danger mt-3 text-center">
-                        NISN tidak ditemukan
-                    </div>
-                @endif
+                <div id="errorBox" class="alert alert-danger mt-3 text-center" style="display:none;">
+                    NISN tidak ditemukan
+                </div>
 
                 {{-- HASIL --}}
                 @if(isset($students))
@@ -102,7 +119,7 @@
                             </div>
                         @else
                             <div class="mb-3">
-                                <h2 class="text-danger fw-bold">PENGUMUMAN</h2>
+                                <h2 class="text-danger fw-bold">MOHON MAAF</h2>
                                 <h4 class="fw-semibold">ANDA DINYATAKAN TIDAK LULUS</h4>
                             </div>
                         @endif
@@ -113,7 +130,7 @@
                         <div class="text-start mt-3">
                             <table class="table table-borderless">
                                 <tr>
-                                    <td width="40%"><strong>Nama</strong></td>
+                                    <td width="30%"><strong>Nama</strong></td>
                                     <th>: {{ $students->name }}</th>
                                 </tr>
                                 <tr>
@@ -126,7 +143,7 @@
                                 </tr>
                                 <tr>
                                     <td><strong>Kelas</strong></td>
-                                    <td>: {{ $students->classroom->name }} - {{ $students->major->name }}</td>
+                                    <td>: {{ optional($students->classroom)->name }} - {{ optional($students->major)->name }}</td>
                                 </tr>
                             </table>
                         </div>
@@ -143,18 +160,6 @@
                         @endif
 
                     </div>
-                    {{-- <div class="mt-4 p-4 border rounded text-center">
-
-                        <h5 class="fw-bold">{{ $students->name }}</h5>
-                        <p>NISN: {{ $students->nisn }}</p>
-
-                        @if($students->status == 1)
-                            <h3 class="text-success mt-3">🎉 SELAMAT ANDA LULUS</h3>
-                        @else
-                            <h3 class="text-danger mt-3">MAAF ANDA TIDAK LULUS</h3>
-                        @endif
-
-                    </div> --}}
                 @endif
 
             </div>
@@ -164,11 +169,12 @@
 
 <!-- SCRIPT COUNTDOWN -->
 <script>
-    const targetDate = new Date("2026-04-29T16:55:00+07:00").getTime();
+    const targetDate = new Date("2026-05-04T21:00:00+07:00").getTime();
 
     const countdownEl = document.getElementById("countdown");
     const statusText = document.getElementById("statusText");
     const submitBtn = document.getElementById("submitBtn");
+    const nisnInput = document.querySelector("input[name='nisn']");
 
     function updateCountdown() {
         const now = new Date().getTime();
@@ -177,21 +183,97 @@
         if (distance <= 0) {
             statusText.innerHTML = "SUDAH DIBUKA";
             countdownEl.innerHTML = "";
+
+            // ✅ AKTIFKAN INPUT & BUTTON
             submitBtn.disabled = false;
+            nisnInput.disabled = false;
+
             return;
         }
 
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
         const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
         const minutes = Math.floor((distance / (1000 * 60)) % 60);
         const seconds = Math.floor((distance / 1000) % 60);
 
         statusText.innerHTML = "BELUM DIBUKA";
-        countdownEl.innerHTML = `${hours} jam ${minutes} menit ${seconds} detik`;
+        countdownEl.innerHTML = `${days} hari ${hours} jam ${minutes} menit ${seconds} detik`;
+
+        // 🔒 KUNCI INPUT & BUTTON
         submitBtn.disabled = true;
+        nisnInput.disabled = true;
     }
 
     setInterval(updateCountdown, 1000);
     updateCountdown();
+</script>
+
+<script>
+window.onload = function() {
+
+    const form = document.getElementById("formCek");
+    const submitBtn = document.getElementById("submitBtn");
+    const nisnInput = document.querySelector("input[name='nisn']");
+    const loadingBox = document.getElementById("loadingBox");
+    const countdownAnim = document.getElementById("countdownAnim");
+    const errorBox = document.getElementById("errorBox");
+
+    if (!form || !submitBtn || !nisnInput) {
+        console.log("Element penting tidak ditemukan!");
+        return;
+    }
+
+    form.addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const nisn = nisnInput.value;
+
+        if (!nisn) return;
+
+        if (errorBox) errorBox.style.display = "none";
+        if (loadingBox) loadingBox.style.display = "none";
+
+        fetch("{{ url('cek-nisn') }}?nisn=" + nisn)
+        .then(res => res.json()) // 🔥 langsung JSON (karena sudah benar)
+        .then(data => {
+
+            console.log("DATA:", data);
+
+            // ❌ NISN SALAH
+            if (!data.found) {
+                if (errorBox) errorBox.style.display = "block";
+                return;
+            }
+
+            // ✅ NISN BENAR → ANIMASI
+            let count = 5;
+
+            if (loadingBox) loadingBox.style.display = "block";
+
+            submitBtn.disabled = true;
+            submitBtn.innerText = "Memproses...";
+
+            let interval = setInterval(function() {
+                if (countdownAnim) countdownAnim.innerText = count;
+
+                count--;
+
+                if (count < 0) {
+                    clearInterval(interval);
+
+                    // lanjut ke hasil
+                    form.submit();
+                }
+            }, 1000);
+
+        })
+        .catch(err => {
+            console.log(err);
+            alert("Koneksi gagal");
+        });
+    });
+
+};
 </script>
 
 </body>

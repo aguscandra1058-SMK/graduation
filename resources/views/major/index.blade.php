@@ -11,8 +11,8 @@
             <table class="table table-bordered table-striped">
                 <tr class="text-center">
                     <th width="5%">No.</th>
-                    <th width="85%">Jurusan</th>
-                    <th width="10%">Aksi</th>
+                    <th width="80%">Jurusan</th>
+                    <th width="15%">Aksi</th>
                 </tr>
                 @foreach ($majors as $key => $major)
                 <tr>
